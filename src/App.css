@@ -22,3 +22,8 @@ h1 {
 .favorites-button {
 	margin-bottom: 1rem;
 }
+
+.sort-label {
+	display: inline-block;
+	margin-left: 0.25rem;
+}

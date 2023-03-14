@@ -124,11 +124,11 @@ function App() {
 				<span id="sort-buttons">
 					<label className="radio">
 						<input type="radio" onChange={() => changeSort('id')} name="sort-pokemon" value="id" checked={sortSelection === 'id' ? 'checked' : ''} />
-						Sort by ID
+						<span class="sort-label">Sort by ID</span>
 					</label>
 					<label className="radio">
 						<input type="radio" onChange={() => changeSort('type')} name="sort-pokemon" value="type" checked={sortSelection === 'type' ? 'checked' : ''} />
-						Sort by Type
+						<span class="sort-label">Sort by Type</span>
 					</label>
 				</span>
 				<div className="select">
