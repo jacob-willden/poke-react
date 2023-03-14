@@ -1,16 +1,19 @@
+import {useState} from 'react';
+
 //import logo from './logo.svg';
 import './bulma.min.css';
 import './App.css';
 
 function App() {
-	let pokemonToDisplay = [];
-    let totalPokemon = 1279;
-    let offset = 0;
-    let sortSelection = 'id';
-    let favoritePokemon = [];
-    let modalVisible = false;
-    let selectDisabled = true;
-    let selectedType = 1;
+	let [pokemonToDisplay, setPokemonToDisplay] = useState([]);
+    let [offset, setOffset] = useState(0);
+    let [sortSelection, setSortSelection] = useState('id');
+    let [favoritePokemon, setFavoritePokemon] = useState([]);
+    let [modalVisible, setModalVisible] = useState(false);
+	let [selectDisabled, setSelectDisabled] = useState(true);
+    let [selectedType, setSelectedType] = useState(1);
+
+	const totalPokemon = 1279;
 
     async function fetchData(url) {
         try {
@@ -37,12 +40,12 @@ function App() {
                     image: singlePokemonData.image
                 });
             }
-            pokemonToDisplay = pokemonList;
+            setPokemonToDisplay(pokemonList); //pokemonToDisplay = pokemonList;
         }
         else if(sortSelection === 'type') {
             const typeList = await fetchData(`https://pokeapi.co/api/v2/type/${selectedType}`);
             //console.log('typeList:', typeList);
-            pokemonToDisplay = [];
+			setPokemonToDisplay([]); //pokemonToDisplay = [];
 
             const idexesToFetch = [];
             for(let i = offset; i <= offset + 9; i++) {
@@ -64,7 +67,7 @@ function App() {
                     image: singlePokemonData.image
                 });
             }
-            pokemonToDisplay = pokemonList;
+            setPokemonToDisplay(pokemonList); //pokemonToDisplay = pokemonList;
         }
     }
 
@@ -77,7 +80,7 @@ function App() {
 
     function changeOffsetAndRefresh(number) {
         if(offset + number >= 0 && offset + number <= totalPokemon) {
-            offset += number;
+			setOffset(offset + number); //offset += number;
             console.log('new offset:', offset);
             get10Pokemon(offset, sortSelection);
         }
@@ -169,7 +172,7 @@ function App() {
 							<td>{pokemon.type}</td>
 							<td><a href={pokemon.image}>View</a></td>
 							<td>
-								<input onClick={() => {toggleFavorite(pokemon)}} type="checkbox" className="checkbox favorite-button" checked={favoritePokemon.find(item => item.id === pokemon.id) ? true : false} />
+								<input onChange={() => {toggleFavorite(pokemon)}} type="checkbox" className="checkbox favorite-button" checked={favoritePokemon.find(item => item.id === pokemon.id) ? true : false} />
 							</td>
 						</tr>
 					))}
