@@ -1,4 +1,4 @@
-import {useState} from 'react';
+import {useState, useEffect} from 'react';
 
 //import logo from './logo.svg';
 import './bulma.min.css';
@@ -89,31 +89,33 @@ function App() {
     function toggleFavorite(pokemon) {
         const index = favoritePokemon.findIndex(item => item.id.toString() === pokemon.id);
         if(index === -1) {
-            favoritePokemon = [...favoritePokemon, pokemon]; // Reactive alternative to push, from the official Svelte tutorial: https://svelte.dev/tutorial/updating-arrays-and-objects
+			setFavoritePokemon([...favoritePokemon, pokemon]);
         }
         else {
-            favoritePokemon = favoritePokemon.filter(item => item.id.toString() !== pokemon.id); // Reactive alternative to splice, from Tholle on StackOverflow: https://stackoverflow.com/questions/58964087/how-to-update-an-array-after-splice-in-svelte
+			setFavoritePokemon(favoritePokemon.filter(item => item.id.toString() !== pokemon.id));
         }
         //console.log('new favorites:', favoritePokemon);
     }
 
     function changeSort(selection) {
-        sortSelection = selection;
+		setSortSelection(selection); //sortSelection = selection;
         if(selection === 'id') {
-            selectDisabled = true;
+            setSelectDisabled(true); //selectDisabled = true;
         }
         else if(selection === 'type') {
-            selectDisabled = false;
+            setSelectDisabled(false); //selectDisabled = false;
         }
         changeOffsetAndRefresh(0);
     }
 
     function changeSelectedType(event) {
-        selectedType = event.target.value;
+		setSelectedType(event.target.value); //selectedType = event.target.value;
         changeOffsetAndRefresh(0);
     }
 
-	// onMount equivalent?
+	useEffect(() => {
+		get10Pokemon(0, 'id');
+    }, []);
 
 	return (
 		<main>
@@ -121,11 +123,11 @@ function App() {
 			<div className="button-row">
 				<span id="sort-buttons">
 					<label className="radio">
-						<input type="radio" onChange={() => changeSort('id')} name="sort-pokemon" value="id" checked />
+						<input type="radio" onChange={() => changeSort('id')} name="sort-pokemon" value="id" checked={sortSelection === 'id' ? 'checked' : ''} />
 						Sort by ID
 					</label>
 					<label className="radio">
-						<input type="radio" onChange={() => changeSort('type')} name="sort-pokemon" value="type" />
+						<input type="radio" onChange={() => changeSort('type')} name="sort-pokemon" value="type" checked={sortSelection === 'type' ? 'checked' : ''} />
 						Sort by Type
 					</label>
 				</span>
@@ -152,7 +154,7 @@ function App() {
 					</select>
 				</div>
 			</div>
-			<button onClick={() => {modalVisible = true}} className="button favorites-button">View Favorites</button>
+			<button onClick={() => {setModalVisible(true)}} className="button favorites-button">View Favorites</button>
 
 			<table className="table">
 				<thead>
@@ -212,7 +214,7 @@ function App() {
 					</div>
 				</div>
 
-				<button onClick={() => {modalVisible = false}} className="modal-close is-large" aria-label="close"></button>
+				<button onClick={() => {setModalVisible(false)}} className="modal-close is-large" aria-label="close"></button>
 			</div>
 			<p>This project is for educational uses only.</p>
 		</main>
