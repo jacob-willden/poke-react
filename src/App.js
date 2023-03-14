@@ -115,7 +115,7 @@ function App() {
 
 	useEffect(() => {
 		get10Pokemon(0, 'id');
-    }, []);
+    });
 
 	return (
 		<main>
