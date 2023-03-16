@@ -123,12 +123,12 @@ function App() {
 			<div className="button-row">
 				<span id="sort-buttons">
 					<label className="radio">
-						<input type="radio" onChange={() => changeSort('id')} name="sort-pokemon" value="id" checked={sortSelection === 'id' ? 'checked' : ''} />
-						<span class="sort-label">Sort by ID</span>
+						<input type="radio" onChange={() => {changeSort('id')}} name="sort-pokemon" value="id" checked={sortSelection === 'id' ? 'checked' : ''} />
+						<span className="sort-label">Sort by ID</span>
 					</label>
 					<label className="radio">
-						<input type="radio" onChange={() => changeSort('type')} name="sort-pokemon" value="type" checked={sortSelection === 'type' ? 'checked' : ''} />
-						<span class="sort-label">Sort by Type</span>
+						<input type="radio" onChange={() => {changeSort('type')}} name="sort-pokemon" value="type" checked={sortSelection === 'type' ? 'checked' : ''} />
+						<span className="sort-label">Sort by Type</span>
 					</label>
 				</span>
 				<div className="select">
@@ -182,8 +182,8 @@ function App() {
 			</table>
 
 			<div className="button-row">
-				<button onClick={() => changeOffsetAndRefresh(-10)} className="button">Previous</button>
-				<button onClick={() => changeOffsetAndRefresh(10)} className="button">Next</button>
+				<button onClick={() => {changeOffsetAndRefresh(-10)}} className="button">Previous</button>
+				<button onClick={() => {changeOffsetAndRefresh(10)}} className="button">Next</button>
 			</div>
 
 			<div className={`modal ${modalVisible ? 'is-active' : ''}`}>
