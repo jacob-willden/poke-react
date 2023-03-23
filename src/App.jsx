@@ -80,8 +80,7 @@ function App() {
 	function changeOffsetAndRefresh(number) {
 		if (offset + number >= 0 && offset + number <= totalPokemon) {
 			setOffset(offset + number); //offset += number;
-			console.log('new offset:', offset);
-			get10Pokemon(offset, sortSelection);
+			get10Pokemon(offset + number, sortSelection); 
 		}
 	}
 
