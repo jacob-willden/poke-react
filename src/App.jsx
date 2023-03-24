@@ -25,7 +25,10 @@ function App() {
 		}
 	}
 
-	async function get10Pokemon(offset, sortSelection) {
+	async function get10Pokemon(offset, sortSelection, typeChoice) {
+		if(!typeChoice) {
+			typeChoice = selectedType;
+		}
 		if (sortSelection === 'id' && offset < totalPokemon - 10) {
 			const data = await fetchData(`https://pokeapi.co/api/v2/pokemon?limit=10&offset=${offset}`);
 			const pokemonList = [];
@@ -42,7 +45,7 @@ function App() {
 			setPokemonToDisplay(pokemonList); //pokemonToDisplay = pokemonList;
 		}
 		else if (sortSelection === 'type') {
-			const typeList = await fetchData(`https://pokeapi.co/api/v2/type/${selectedType}`);
+			const typeList = await fetchData(`https://pokeapi.co/api/v2/type/${typeChoice}`);
 			//console.log('typeList:', typeList);
 
 			const idexesToFetch = [];
@@ -111,7 +114,7 @@ function App() {
 
 	function changeSelectedType(event) {
 		setSelectedType(event.target.value); //selectedType = event.target.value;
-		changeOffsetAndRefresh(0);
+		get10Pokemon(offset, sortSelection, event.target.value);
 	}
 
 	useEffect(() => {
