@@ -44,7 +44,6 @@ function App() {
 		else if (sortSelection === 'type') {
 			const typeList = await fetchData(`https://pokeapi.co/api/v2/type/${selectedType}`);
 			//console.log('typeList:', typeList);
-			setPokemonToDisplay([]); //pokemonToDisplay = [];
 
 			const idexesToFetch = [];
 			for (let i = offset; i <= offset + 9; i++) {
