@@ -77,10 +77,13 @@ function App() {
 		return { primaryType, image };
 	}
 
-	function changeOffsetAndRefresh(number) {
+	function changeOffsetAndRefresh(number, sortChoice) {
+		if(!sortChoice) {
+			sortChoice = sortSelection;
+		}
 		if (offset + number >= 0 && offset + number <= totalPokemon) {
 			setOffset(offset + number); //offset += number;
-			get10Pokemon(offset + number, sortSelection); 
+			get10Pokemon(offset + number, sortChoice); 
 		}
 	}
 
@@ -95,15 +98,16 @@ function App() {
 		//console.log('new favorites:', favoritePokemon);
 	}
 
-	function changeSort(selection) {
-		setSortSelection(selection); //sortSelection = selection;
+	function changeSort(event) {
+		const selection = event.target.value;
+ 		setSortSelection(selection); //sortSelection = selection;
 		if (selection === 'id') {
 			setSelectDisabled(true); //selectDisabled = true;
 		}
 		else if (selection === 'type') {
 			setSelectDisabled(false); //selectDisabled = false;
 		}
-		changeOffsetAndRefresh(0);
+		changeOffsetAndRefresh(0, selection);
 	}
 
 	function changeSelectedType(event) {
@@ -121,11 +125,11 @@ function App() {
 			<div className="button-row">
 				<span id="sort-buttons">
 					<label className="radio">
-						<input type="radio" onChange={() => { changeSort('id') }} name="sort-pokemon" value="id" checked={sortSelection === 'id' ? 'checked' : ''} />
+						<input type="radio" onChange={event => changeSort(event)} name="sort-pokemon" value="id" defaultChecked />
 						<span className="sort-label">Sort by ID</span>
 					</label>
 					<label className="radio">
-						<input type="radio" onChange={() => { changeSort('type') }} name="sort-pokemon" value="type" checked={sortSelection === 'type' ? 'checked' : ''} />
+						<input type="radio" onChange={event => changeSort(event)} name="sort-pokemon" value="type" />
 						<span className="sort-label">Sort by Type</span>
 					</label>
 				</span>
