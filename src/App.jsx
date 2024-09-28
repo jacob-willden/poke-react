@@ -220,7 +220,7 @@ function App() {
 
 				<button onClick={() => { setModalVisible(false) }} className="modal-close is-large" aria-label="close"></button>
 			</div>
-			<p>This project is for educational uses only.</p>
+			<p>This project uses the <a href="https://pokeapi.co/">the PokéAPI (Pokémon Application Programming Interface)</a>.</p>
 		</main>
 	);
 }
