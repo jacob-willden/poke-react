@@ -4,12 +4,12 @@ import './skeleton.min.css';
 import './main.css';
 
 function App() {
-	let [pokemonToDisplay, setPokemonToDisplay] = useState([]);
-	let [offset, setOffset] = useState(0);
-	let [sortSelection, setSortSelection] = useState('id');
-	let [favoritePokemon, setFavoritePokemon] = useState([]);
-	let [selectDisabled, setSelectDisabled] = useState(true);
-	let [selectedType, setSelectedType] = useState(1);
+	const [pokemonToDisplay, setPokemonToDisplay] = useState([]);
+	const [offset, setOffset] = useState(0);
+	const [sortSelection, setSortSelection] = useState('id');
+	const [favoritePokemon, setFavoritePokemon] = useState([]);
+	const [selectDisabled, setSelectDisabled] = useState(true);
+	const [selectedType, setSelectedType] = useState(1);
 	const modalElement = useRef(null);
 
 	const totalPokemon = 1279;
