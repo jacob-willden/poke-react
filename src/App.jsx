@@ -1,16 +1,16 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 
-import './bulma.min.css';
-import './App.css';
+import './skeleton.min.css';
+import './main.css';
 
 function App() {
 	let [pokemonToDisplay, setPokemonToDisplay] = useState([]);
 	let [offset, setOffset] = useState(0);
 	let [sortSelection, setSortSelection] = useState('id');
 	let [favoritePokemon, setFavoritePokemon] = useState([]);
-	let [modalVisible, setModalVisible] = useState(false);
 	let [selectDisabled, setSelectDisabled] = useState(true);
 	let [selectedType, setSelectedType] = useState(1);
+	const modalElement = useRef(null);
 
 	const totalPokemon = 1279;
 
@@ -85,7 +85,7 @@ function App() {
 		}
 		if (offset + number >= 0 && offset + number <= totalPokemon) {
 			setOffset(offset + number); //offset += number;
-			get10Pokemon(offset + number, sortChoice); 
+			get10Pokemon(offset + number, sortChoice);
 		}
 	}
 
@@ -123,7 +123,7 @@ function App() {
 
 	return (
 		<main>
-			<h1 className="title">Pokémon Vue App</h1>
+			<h1 className="title">Pokémon React App</h1>
 			<div className="button-row">
 				<span id="sort-buttons">
 					<label className="radio">
@@ -158,7 +158,30 @@ function App() {
 					</select>
 				</div>
 			</div>
-			<button onClick={() => { setModalVisible(true) }} className="button favorites-button">View Favorites</button>
+			<button onClick={() => { modalElement?.current.showModal() }} className="button favorites-button">View Favorites</button>
+			<dialog ref={modalElement}>
+				<button onClick={() => { modalElement?.current.close() }} className="button">Close</button>
+				<table className="table">
+					<thead>
+						<tr>
+							<th>ID</th>
+							<th>Name</th>
+							<th>Primary Type</th>
+							<th>Image</th>
+						</tr>
+					</thead>
+					<tbody>
+						{favoritePokemon.map(pokemon => (
+							<tr key={pokemon.id}>
+								<td>{pokemon.id}</td>
+								<td>{pokemon.name}</td>
+								<td>{pokemon.type}</td>
+								<td><a href={pokemon.image}>View</a></td>
+							</tr>
+						))}
+					</tbody>
+				</table>
+			</dialog>
 
 			<table className="table">
 				<thead>
@@ -190,36 +213,6 @@ function App() {
 				<button onClick={() => { changeOffsetAndRefresh(10) }} className="button">Next</button>
 			</div>
 
-			<div className={`modal ${modalVisible ? 'is-active' : ''}`}>
-				<div className="modal-background"></div>
-
-				<div className="modal-content">
-					<div className="box">
-						<table className="table">
-							<thead>
-								<tr>
-									<th>ID</th>
-									<th>Name</th>
-									<th>Primary Type</th>
-									<th>Image</th>
-								</tr>
-							</thead>
-							<tbody>
-								{favoritePokemon.map(pokemon => (
-									<tr key={pokemon.id}>
-										<td>{pokemon.id}</td>
-										<td>{pokemon.name}</td>
-										<td>{pokemon.type}</td>
-										<td><a href={pokemon.image}>View</a></td>
-									</tr>
-								))}
-							</tbody>
-						</table>
-					</div>
-				</div>
-
-				<button onClick={() => { setModalVisible(false) }} className="modal-close is-large" aria-label="close"></button>
-			</div>
 			<p>This project uses the <a href="https://pokeapi.co/">the PokéAPI (Pokémon Application Programming Interface)</a>.</p>
 		</main>
 	);

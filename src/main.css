@@ -1,0 +1,74 @@
+main {
+	max-width: 80rem;
+	margin: 0 auto;
+	padding: 2rem;
+}
+
+a:is(:focus), input:is(:focus), textarea:is(:focus), select:is(:focus), .button:is(:focus) {
+	outline: #145F76 solid 0.2rem;
+	outline-offset: 0.25rem;
+	border-radius: 0.1rem;
+}
+
+a {
+	color: #145F76;
+}
+
+a:hover {
+	color: #052029;
+}
+
+select:not(:disabled), .button {
+	border-color: #808080;
+}
+
+.button {
+	background-color: #145F76;
+	color: white;
+	text-transform: none;
+	font-size: 1em;
+	cursor: default;
+}
+
+.button:hover {
+	background-color: #052029;
+	color: white;
+}
+
+.button:is(:focus) {
+	color: white;
+}
+
+input[type="checkbox"], input[type="radio"] {
+	width: 1.2em;
+	height: 1.2em;
+	margin-bottom: 0.225em;
+}
+
+label.radio {
+	margin-bottom: 1.2em;
+}
+
+h1 {
+	font-size: 2rem;
+}
+
+.button-row {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding-bottom: 1rem;
+}
+
+.select {
+	margin-left: 1rem;
+}
+
+.favorites-button {
+	margin-bottom: 1rem;
+}
+
+.sort-label {
+	display: inline-block;
+	margin-left: 0.25rem;
+}
