@@ -8,7 +8,6 @@ function App() {
 	const [offset, setOffset] = useState(0);
 	const [sortSelection, setSortSelection] = useState('id');
 	const [favoritePokemon, setFavoritePokemon] = useState([]);
-	const [selectDisabled, setSelectDisabled] = useState(true);
 	const [selectedType, setSelectedType] = useState(1);
 	const modalElement = useRef(null);
 
@@ -103,18 +102,14 @@ function App() {
 	function changeSort(event) {
 		const selection = event.target.value;
  		setSortSelection(selection); //sortSelection = selection;
-		if (selection === 'id') {
-			setSelectDisabled(true); //selectDisabled = true;
-		}
-		else if (selection === 'type') {
-			setSelectDisabled(false); //selectDisabled = false;
-		}
 		changeOffsetAndRefresh(0, selection);
 	}
 
 	function changeSelectedType(event) {
-		setSelectedType(event.target.value); //selectedType = event.target.value;
-		get10Pokemon(offset, sortSelection, event.target.value);
+		if(sortSelection === 'type') {
+			setSelectedType(event.target.value); //selectedType = event.target.value;
+			get10Pokemon(offset, sortSelection, event.target.value);
+		}
 	}
 
 	useEffect(() => {
@@ -136,7 +131,7 @@ function App() {
 					</label>
 				</span>
 				<div className="select">
-					<select onChange={(event) => changeSelectedType(event)} disabled={selectDisabled}>
+					<select onChange={(event) => changeSelectedType(event)}>
 						<option value="1">Normal</option>
 						<option value="2">Fighting</option>
 						<option value="3">Flying</option>
