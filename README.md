@@ -11,4 +11,4 @@
 You can stop the server by either using a keyboard shortcut to cancel the run command (e.g. <kbd>Control</kbd>+<kbd>C</kbd>), or by quitting the command line program.
 
 ## Licensing
-This repository is released under [the BSD-2-Clause-Plus-Patent License](https://spdx.org/licenses/BSD-2-Clause-Patent).
+This repository is released under [the Universal Permissive License (UPL), Version 1.0](https://github.com/jacob-willden/poke-react/blob/main/LICENSE).
