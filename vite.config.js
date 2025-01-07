@@ -2,9 +2,9 @@ import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 
 // https://vitejs.dev/config/
+// https://github.com/vitejs/vite/issues/378#issuecomment-768816653
 export default defineConfig({
 	plugins: [react()],
-    // © 2024 Rafał Goławski, released under the Universal Permissive License version 1.0
 	build: {
 		rollupOptions: {
 			output: {
