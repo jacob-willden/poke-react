@@ -12,3 +12,5 @@ You can stop the server by either using a keyboard shortcut to cancel the run co
 
 ## Licensing
 This repository is released under [the Universal Permissive License (UPL), Version 1.0](https://github.com/jacob-willden/poke-react/blob/main/LICENSE).
+
+`SPDX-License-Identifier: UPL-1.0`
